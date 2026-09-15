@@ -1,0 +1,41 @@
+Proposed model: Gated-Fusion CNN+GAT v2 (backend/model.py::build_model("cnn_gat_v2", ...))
+
+Task (pre-race, leakage-safe): given two drivers starting grid-adjacent,
+predict P(driver starting behind finishes ahead). All inputs knowable at
+grid time; no finish-derived or full-race features (see backend/real_data.py
+assert_no_leakage gate).
+
+  1. Temporal branch: 1D CNN (32->48->hidden, BN+GELU, stride-2 + AvgPool)
+     over a TRUE history sequence of length T=8: channel 2 carries each
+     driver's last 8 prior-race finishes (oldest->newest, strictly past
+     races); remaining channels are legitimately static at grid time.
+     Output per driver: h_cnn in R^hidden.
+  2. Graph branch: drivers are nodes (N=22 padded), edges connect
+     grid-adjacent cars (+ self-loops). Static grid-time projection +
+     1 GAT layer (heads=4, LeakyReLU 0.2, dropout 0.15) + residual + LayerNorm.
+     Output per driver: h_gat in R^hidden.
+  3. Gated fusion (novelty vs naive concat / sequential CNN->GAT):
+       g = sigmoid(W2 GELU(W1 [h_cnn; h_gat; h_cnn - h_gat]))
+       h = LayerNorm(g * h_cnn + (1 - g) * h_gat)
+     The gate lets each driver adaptively trust form-history vs grid context.
+  4. Pair readout: for each (attacker, defender) pair,
+     logit = MLP([h_att; h_def; h_att - h_def]) -> BCEWithLogitsLoss.
+     Hyperparameters: hidden=48, AdamW lr=1e-3 wd=1e-4, grad-clip 1.0,
+     batch=8, up to 30 epochs with early stopping (patience 8 on val AUC).
+
+Legacy v1 ("cnn_gat"): sequential CNN->2xGAT->head, kept as an ablation point.
+
+Baselines on the identical race-level splits (60/20/20, seeds 42/43/44):
+  deep  - CNN only, GAT only, LSTM, CNN+LSTM, GCN, Transformer-over-history
+  classical (SOTA sanity) - LogisticRegression, HistGradientBoosting on
+    flattened pair features [f_att; f_def; f_att - f_def]
+Reported: accuracy/precision/recall/specificity/F1/AUC as mean+-std over
+seeds + bootstrap 95% CI for the proposed model (results/significance.json).
+
+Ablations (proposed v2, one group zeroed at a time): no_form_pace,
+no_trend, no_pit_prior, no_quali_gap, no_grid_gap, full_proposed.
+
+Checkpoints: checkpoints/<model>.pt for every deep model (state_dict +
+best val metrics + seed). Dashboard serves cnn_gat_v2.pt (falls back to
+cnn_gat.pt). Full test metrics: results/metrics.json,
+results/model_comparison_test.csv.

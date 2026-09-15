@@ -1,0 +1,22 @@
+Dataset: f1db (https://github.com/f1db/f1db), trimmed to the 2014+ hybrid-turbo era.
+
+Files (all real, unmodified except year filtering):
+  races.csv               275 races, 2014-2024+
+  drivers.csv             917 driver records
+  constructors.csv        team metadata
+  race_results.csv        5,394 driver-race classification rows (grid pos, finish pos, pit stops)
+  qualifying_results.csv  qualifying gap-to-pole per driver per race
+  pit_stops.csv           individual pit stop lap numbers
+
+Unit of prediction: a race is expanded into grid-adjacent driver pairs
+(defender = starts ahead, attacker = starts behind). Label = 1 if the
+attacker finishes ahead of the defender, else 0.
+
+Split: race-level 60/20/20 train/val/test (see backend/real_data.py,
+seed=42). Splitting by whole race, not by pair, prevents pairs from the
+same race leaking across splits.
+
+Exact counts, class balance, and per-split pair counts are written to
+results/dataset_distribution.json every time backend/train.py is run
+(they depend on how many races survive the n>=6-driver filter, so they
+are computed, not hand-typed here).

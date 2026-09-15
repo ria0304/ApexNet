@@ -1,0 +1,188 @@
+id,name,totalRaceWins,totalPodiums,totalPoints
+adams,Adams,0,0,0.0
+afm,AFM,0,0,0.0
+ags,AGS,0,0,2.0
+alfa-romeo,Alfa Romeo,10,26,199.0
+alfa-special,Alfa Special,0,0,0.0
+alphatauri,AlphaTauri,1,2,309.0
+alpine,Alpine,1,6,597.0
+alta,Alta,0,0,0.0
+amon,Amon,0,0,0.0
+andrea-moda,Andrea Moda,0,0,0.0
+apollon,Apollon,0,0,0.0
+arrows,Arrows,0,8,142.0
+arzani-volpini,Arzani-Volpini,0,0,0.0
+aston-butterworth,Aston Butterworth,0,0,0.0
+aston-martin,Aston Martin,0,9,598.0
+ats-wheels,ATS,0,0,7.0
+ats,ATS,0,0,0.0
+audi,Audi,0,0,16.0
+balsa,Balsa,0,0,0.0
+bar,BAR,0,15,227.0
+behra-porsche,Behra-Porsche,0,0,0.0
+bellasi,Bellasi,0,0,0.0
+benetton,Benetton,27,102,861.5
+bmw-sauber,BMW Sauber,1,17,308.0
+bmw,BMW,0,0,0.0
+boro,Boro,0,0,0.0
+brabham,Brabham,35,124,983.0
+brawn,Brawn,8,15,172.0
+brm,BRM,17,61,535.5
+bromme,Bromme,0,0,0.0
+brp,BRP,0,0,11.0
+bugatti,Bugatti,0,0,0.0
+cadillac,Cadillac,0,0,0.0
+caterham,Caterham,0,0,0.0
+christensen,Christensen,0,0,0.0
+cisitalia,Cisitalia,0,0,0.0
+coloni,Coloni,0,0,0.0
+connaught,Connaught,0,1,0.0
+connew,Connew,0,0,0.0
+cooper,Cooper,16,58,480.5
+dallara,Dallara,0,2,15.0
+de-tomaso,De Tomaso,0,0,0.0
+deidt,Deidt,0,2,0.0
+del-roy,Del Roy,0,0,0.0
+derrington-francis,Derrington-Francis,0,0,0.0
+dunn,Dunn,0,0,0.0
+eagle,Eagle,1,2,17.0
+eifelland,Eifelland,0,0,0.0
+elder,Elder,0,0,0.0
+emeryson,Emeryson,0,0,0.0
+emw,EMW,0,0,0.0
+enb,ENB,0,0,0.0
+ensign,Ensign,0,0,19.0
+epperly,Epperly,2,5,29.0
+era,ERA,0,0,0.0
+eurobrun,EuroBrun,0,0,0.0
+ewing,Ewing,0,0,0.0
+ferguson,Ferguson,0,0,0.0
+ferrari,Ferrari,250,845,11377.0
+first,FIRST,0,0,0.0
+fittipaldi,Fittipaldi,0,3,44.0
+fondmetal,Fondmetal,0,0,0.0
+footwork,Footwork,0,1,25.0
+force-india,Force India,0,6,1098.0
+forti,Forti,0,0,0.0
+frank-williams-racing-cars,Frank Williams Racing Cars,0,1,6.0
+frazer-nash,Frazer-Nash,0,0,0.0
+fry,Fry,0,0,0.0
+gilby,Gilby,0,0,0.0
+gordini,Gordini,0,2,0.0
+greifzu,Greifzu,0,0,0.0
+haas,Haas,0,0,407.0
+hall,Hall,0,0,0.0
+heck,Heck,0,0,0.0
+hesketh,Hesketh,1,7,48.0
+hill,Hill,0,0,3.0
+honda,Honda,3,9,156.0
+hrt,HRT,0,0,0.0
+hwm,HWM,0,0,0.0
+iso-marlboro,Iso-Marlboro,0,0,6.0
+jaguar,Jaguar,0,2,49.0
+jbw,JBW,0,0,0.0
+jordan,Jordan,4,19,291.0
+kauhsen,Kauhsen,0,0,0.0
+kick-sauber,Kick Sauber,0,1,74.0
+klenk,Klenk,0,0,0.0
+kojima,Kojima,0,0,0.0
+krakau,Krakau,0,0,0.0
+kurtis-kraft,Kurtis Kraft,5,16,4.0
+kuzma,Kuzma,1,3,0.0
+lancia,Lancia,0,1,0.0
+langley,Langley,0,0,0.0
+larrousse,Larrousse,0,0,5.0
+lds,LDS,0,0,0.0
+lec,LEC,0,0,0.0
+lesovsky,Lesovsky,0,1,7.0
+leyton-house,Leyton House,0,1,8.0
+life,Life,0,0,0.0
+ligier,Ligier,9,50,388.0
+lola,Lola,0,3,43.0
+lotus-f1,Lotus,2,25,706.0
+lotus-racing,Lotus Racing,0,0,0.0
+lotus,Lotus,79,172,1514.0
+lyncar,Lyncar,0,0,0.0
+maki,Maki,0,0,0.0
+manor,Manor,0,0,1.0
+march,March,3,21,185.0
+marchese,Marchese,0,0,0.0
+martini,Martini,0,0,0.0
+marussia,Marussia,0,0,2.0
+maserati,Maserati,9,37,9.0
+matra,Matra,9,21,184.0
+mcguire,McGuire,0,0,0.0
+mclaren,McLaren,205,564,8395.5
+mercedes,Mercedes,140,328,8627.5
+merzario,Merzario,0,0,0.0
+meskowski,Meskowski,0,0,0.0
+midland,Midland,0,0,0.0
+minardi,Minardi,0,0,38.0
+modena,Modena,0,0,0.0
+moore,Moore,0,0,0.0
+nacke,Nacke,0,0,0.0
+nichels,Nichels,0,0,0.0
+olson,Olson,0,0,0.0
+onyx,Onyx,0,1,6.0
+osca,O.S.C.A.,0,0,0.0
+osella,Osella,0,0,5.0
+pacific,Pacific,0,0,0.0
+pankratz,Pankratz,0,0,0.0
+parnelli,Parnelli,0,0,6.0
+pawl,Pawl,0,0,0.0
+penske,Penske,1,3,23.0
+phillips,Phillips,0,1,3.0
+politoys,Politoys,0,0,0.0
+porsche,Porsche,1,5,50.0
+prost,Prost,0,3,35.0
+protos,Protos,0,0,0.0
+racing-bulls,Racing Bulls,0,1,167.0
+racing-point,Racing Point,1,4,283.0
+rae,Rae,0,0,0.0
+ram,RAM,0,0,0.0
+rb,RB,0,0,46.0
+rebaque,Rebaque,0,0,0.0
+red-bull,Red Bull,130,303,8492.0
+reif,Reif,0,0,0.0
+renault,Renault,35,103,1777.0
+rial,Rial,0,0,6.0
+sauber,Sauber,0,10,557.0
+scarab,Scarab,0,0,0.0
+schroeder,Schroeder,0,0,0.0
+scirocco,Scirocco,0,0,0.0
+shadow,Shadow,1,7,68.5
+shannon,Shannon,0,0,0.0
+sherman,Sherman,0,0,0.0
+simca-gordini,Simca-Gordini,0,0,0.0
+simtek,Simtek,0,0,0.0
+snowberger,Snowberger,0,0,0.0
+spirit,Spirit,0,0,0.0
+spyker,Spyker,0,0,1.0
+stebro,Stebro,0,0,0.0
+stevens,Stevens,0,0,0.0
+stewart,Stewart,1,5,47.0
+super-aguri,Super Aguri,0,0,4.0
+surtees,Surtees,0,2,54.0
+sutton,Sutton,0,0,0.0
+talbot-lago,Talbot-Lago,0,2,0.0
+tec-mec,Tec-Mec,0,0,0.0
+tecno,Tecno,0,0,1.0
+theodore,Theodore,0,0,2.0
+token,Token,0,0,0.0
+toleman,Toleman,0,3,26.0
+toro-rosso,Toro Rosso,1,3,500.0
+toyota,Toyota,0,13,278.5
+trevis,Trevis,0,0,1.0
+trojan,Trojan,0,0,0.0
+turner,Turner,0,0,0.0
+tyrrell,Tyrrell,23,77,711.0
+vanwall,Vanwall,9,13,68.0
+venturi,Venturi,0,0,1.0
+veritas,Veritas,0,0,0.0
+virgin,Virgin,0,0,0.0
+watson,Watson,3,5,28.0
+wetteroth,Wetteroth,0,0,0.0
+williams,Williams,114,314,3785.0
+wolf-williams,Wolf-Williams,0,0,0.0
+wolf,Wolf,3,13,79.0
+zakspeed,Zakspeed,0,0,2.0

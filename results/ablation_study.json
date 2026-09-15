@@ -1,0 +1,181 @@
+{
+  "baseline_no_form_no_pace": {
+    "disabled_features": [
+      "driver_season_form",
+      "constructor_season_pace"
+    ],
+    "val_best": {
+      "accuracy": 0.6777442094662638,
+      "f1": 0.5348837209302325,
+      "precision": 0.7049808429118773,
+      "recall": 0.4309133489461358,
+      "specificity": 0.8639575971731449,
+      "auc": 0.7509578702592663,
+      "confusion_matrix": [
+        [
+          489,
+          77
+        ],
+        [
+          243,
+          184
+        ]
+      ],
+      "n_eval_pairs": 993,
+      "loss": 0.5038313254714012,
+      "epoch": 8
+    },
+    "test": {
+      "accuracy": 0.7038152610441767,
+      "f1": 0.5885634588563459,
+      "precision": 0.7009966777408638,
+      "recall": 0.5072115384615384,
+      "specificity": 0.8448275862068966,
+      "auc": 0.7693178050397877,
+      "confusion_matrix": [
+        [
+          490,
+          90
+        ],
+        [
+          205,
+          211
+        ]
+      ],
+      "n_eval_pairs": 996
+    }
+  },
+  "minus_pit_stops": {
+    "disabled_features": [
+      "pit_stops_total"
+    ],
+    "val_best": {
+      "accuracy": 0.6998992950654582,
+      "f1": 0.6374695863746959,
+      "precision": 0.6632911392405063,
+      "recall": 0.6135831381733021,
+      "specificity": 0.765017667844523,
+      "auc": 0.7781837290323648,
+      "confusion_matrix": [
+        [
+          433,
+          133
+        ],
+        [
+          165,
+          262
+        ]
+      ],
+      "n_eval_pairs": 993,
+      "loss": 0.5226495698094368,
+      "epoch": 8
+    },
+    "test": {
+      "accuracy": 0.6726907630522089,
+      "f1": 0.6004901960784313,
+      "precision": 0.6125,
+      "recall": 0.5889423076923077,
+      "specificity": 0.7327586206896551,
+      "auc": 0.7259035145888594,
+      "confusion_matrix": [
+        [
+          425,
+          155
+        ],
+        [
+          171,
+          245
+        ]
+      ],
+      "n_eval_pairs": 996
+    }
+  },
+  "minus_quali_gap": {
+    "disabled_features": [
+      "qualifying_gap_to_pole"
+    ],
+    "val_best": {
+      "accuracy": 0.7502517623363545,
+      "f1": 0.6762402088772846,
+      "precision": 0.7640117994100295,
+      "recall": 0.6065573770491803,
+      "specificity": 0.8586572438162544,
+      "auc": 0.8245049279631913,
+      "confusion_matrix": [
+        [
+          486,
+          80
+        ],
+        [
+          168,
+          259
+        ]
+      ],
+      "n_eval_pairs": 993,
+      "loss": 0.4903736665844917,
+      "epoch": 6
+    },
+    "test": {
+      "accuracy": 0.7208835341365462,
+      "f1": 0.6398963730569949,
+      "precision": 0.6938202247191011,
+      "recall": 0.59375,
+      "specificity": 0.8120689655172414,
+      "auc": 0.803908322281167,
+      "confusion_matrix": [
+        [
+          471,
+          109
+        ],
+        [
+          169,
+          247
+        ]
+      ],
+      "n_eval_pairs": 996
+    }
+  },
+  "full_proposed": {
+    "disabled_features": [],
+    "val_best": {
+      "accuracy": 0.7170191339375629,
+      "f1": 0.6420382165605095,
+      "precision": 0.7039106145251397,
+      "recall": 0.5901639344262295,
+      "specificity": 0.8127208480565371,
+      "auc": 0.8061460927996293,
+      "confusion_matrix": [
+        [
+          460,
+          106
+        ],
+        [
+          175,
+          252
+        ]
+      ],
+      "n_eval_pairs": 993,
+      "loss": 0.47062729895114896,
+      "epoch": 9
+    },
+    "test": {
+      "accuracy": 0.7259036144578314,
+      "f1": 0.6591760299625468,
+      "precision": 0.6857142857142857,
+      "recall": 0.6346153846153846,
+      "specificity": 0.7913793103448276,
+      "auc": 0.7923491379310346,
+      "confusion_matrix": [
+        [
+          459,
+          121
+        ],
+        [
+          152,
+          264
+        ]
+      ],
+      "n_eval_pairs": 996
+    }
+  }
+}

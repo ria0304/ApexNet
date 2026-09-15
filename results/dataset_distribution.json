@@ -1,0 +1,33 @@
+{
+  "races": {
+    "train": {
+      "count": 159,
+      "pct": 60.0
+    },
+    "val": {
+      "count": 53,
+      "pct": 20.0
+    },
+    "test": {
+      "count": 53,
+      "pct": 20.0
+    }
+  },
+  "pairs": {
+    "train": {
+      "total_pairs": 2987,
+      "positive_overtakes": 1289,
+      "positive_rate": 0.432
+    },
+    "val": {
+      "total_pairs": 993,
+      "positive_overtakes": 427,
+      "positive_rate": 0.43
+    },
+    "test": {
+      "total_pairs": 996,
+      "positive_overtakes": 416,
+      "positive_rate": 0.418
+    }
+  }
+}

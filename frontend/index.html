@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ApexNet — F1 Overtaking Prediction</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="scanlines"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-mark">AN</div>
+      <div>
+        <div class="brand-name">APEXNET</div>
+        <div class="brand-sub">CNN + Graph Attention · Overtake Intelligence</div>
+      </div>
+    </div>
+    <div class="session-meta">
+      <div class="pill" id="track-pill">SPA-FRANCORCHAMPS</div>
+      <div class="lap-block">
+        <span class="muted">LAP</span>
+        <span id="lap-now">01</span><span class="muted" id="lap-total">/44</span>
+      </div>
+      <div class="flag" id="flag">GREEN</div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="col left">
+      <div class="panel">
+        <div class="panel-h">
+          <h2>Live Classification</h2>
+          <span class="tiny" id="field-count">20 cars</span>
+        </div>
+        <div class="board-head">
+          <span>P</span><span>DRIVER</span><span>TYRE</span><span>DRS</span><span>PACE</span>
+        </div>
+        <ol class="board" id="board"></ol>
+      </div>
+    </section>
+
+    <section class="col center">
+      <div class="panel track-panel">
+        <div class="panel-h">
+          <h2>Circuit Map</h2>
+          <span class="tiny" id="track-info">7.004 km · 19 corners</span>
+        </div>
+        <svg id="circuit" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+      <div class="row-2">
+        <div class="panel">
+          <div class="panel-h"><h2>Telemetry — Selected</h2><span class="tiny" id="sel-name">VER</span></div>
+          <canvas id="tele-chart" width="520" height="140"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-h"><h2>Car Interaction Graph</h2><span class="tiny">GAT edges</span></div>
+          <svg id="graph" viewBox="0 0 320 160"></svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="col right">
+      <div class="panel predict-panel">
+        <div class="panel-h">
+          <h2>Overtake Probability</h2>
+          <span class="tiny">next 5 laps</span>
+        </div>
+        <div id="preds"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h2>Race Control</h2></div>
+        <div class="controls">
+          <label>Circuit
+            <select id="track-select"></select>
+          </label>
+          <div class="btn-row">
+            <button id="btn-reset" class="ghost">Reset GP</button>
+            <button id="btn-step">+1 Lap</button>
+            <button id="btn-run" class="accent">Simulate 5</button>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="auto" />
+            Auto pace
+          </label>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h2>Model Comparison</h2><span class="tiny">val AUC</span></div>
+        <div id="metrics"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h2>Race Log</h2></div>
+        <ul class="log" id="log"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    Graph-Attentive Deep Learning for Overtaking Prediction in Formula One Racing · Temporal CNN extracts telemetry · GAT attends to nearby cars
+  </footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>
