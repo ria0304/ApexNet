@@ -10,7 +10,7 @@
 
 **Given two drivers starting next to each other on the grid, will the one behind finish ahead?**
 
-ApexNet trains five deep-learning architectures on real historical Formula 1 race results (f1db, 2014+) to predict grid-adjacent overtaking outcomes — with a leakage-checked train/val/test split, a held-out confusion matrix, and a feature-ablation study, then replays real races through a live dashboard so predictions can be checked against what actually happened.
+ApexNet trains five deep-learning architectures on real historical Formula 1 race results (f1db, 2014+) to predict grid-adjacent overtaking outcomes — with a leakage-checked train/val/test split, a held-out confusion matrix, and a feature-ablation study — then replays real races through a live dashboard so predictions can be checked against what actually happened.
 
 </div>
 
@@ -24,7 +24,7 @@ Most projects solve that by quietly synthesizing telemetry and presenting it as 
 
 ## The Solution
 
-ApexNet reframes the task around data that **is** real: grid position, qualifying gap, pit-stop lap numbers, and leakage-checked rolling season form, pulled from f1db's public race-results archive — no fabricated signal anywhere in the pipeline.
+ApexNet reframes the task around data that **is** real: grid position, qualifying gap, pit-stop lap numbers, and leakage-checked rolling season form, pulled from f1db's public race-results archive — no fabricated signal in the training pipeline itself.
 
 Instead of predicting a short telemetry window the data can't support, it predicts a real, race-long, binary outcome: **does the driver who starts behind a given rival finish ahead of them by the flag.**
 
@@ -63,9 +63,20 @@ Live dashboard replay against the real historical race
 
 ---
 
+## ⚠️ A Note on Repository State
+
+This README, and everything below it, describes the pipeline that actually produced the committed artifacts in `results/` and `checkpoints/` — five architectures, one training run each (seed=42). That's what you'll reproduce if you run `backend/train.py` from this snapshot.
+
+Two things worth knowing if you're browsing the code directly rather than just reading this file:
+
+- **The backend has moved ahead of these numbers.** `backend/config.py` now defines `SEEDS = [42, 43, 44]`, and `backend/train.py` / `backend/model.py` support eight architectures — the five below plus a `cnn_gat_v2` "gated-fusion" variant, a Transformer baseline, and a GCN baseline — along with two classical scikit-learn baselines (logistic regression, gradient boosting) for a sanity check. `models/model_description.txt` documents that newer pipeline in detail. None of that has been re-run to completion, so its results aren't reflected here. If you pull the latest code and run `train.py`, expect a longer run and a `results/metrics.json` with a different shape than the tables below — re-run it and refresh this README before trusting the newer numbers.
+- **`backend/data.py`** is a leftover synthetic-data generator from an earlier version of this project. It isn't imported by `train.py` or `main.py` — actual training only ever goes through `backend/real_data.py` — but it's still sitting in the repo, which is worth cleaning up given the project's whole pitch is "no fabricated signal anywhere."
+
+---
+
 ## Results Snapshot
 
-Every jewellery type in Velaris renders a distinct silhouette; every architecture here gets an identical evaluation on the same held-out test set — so the numbers are directly comparable:
+Every architecture here gets an identical evaluation on the same held-out test set — so the numbers are directly comparable:
 
 | Model | Accuracy | Precision | Recall | Specificity | F1 | AUC |
 |---|--:|--:|--:|--:|--:|--:|
@@ -75,7 +86,7 @@ Every jewellery type in Velaris renders a distinct silhouette; every architectur
 | CNN+LSTM | 0.705 | 0.662 | 0.599 | 0.781 | 0.629 | 0.780 |
 | **CNN+GAT (proposed)** | 0.713 | 0.659 | **0.649** | 0.759 | **0.654** | 0.795 |
 
-Held-out test set, 275 races → 159/53/53 train/val/test, seed=42, ~42-43% positive rate in every split (not imbalance-inflated).
+Held-out test set, 275 races → 159/53/53 train/val/test, seed=42, ~42–43% positive rate in every split (not imbalance-inflated).
 
 **Honest read:** LSTM is the most conservative model — best accuracy and precision, worst recall. CNN+GAT is the best F1/recall trade-off, not an outright winner on every metric. Which one is "correct" depends on whether missing a real overtake or raising a false alarm is costlier for the use case.
 
@@ -101,7 +112,7 @@ Every race replays with a distinct real grid, real pit-stop laps, and real final
 
 ## Deep Learning Modules
 
-Five architectures, all trained on the identical real dataset and split, all independently evaluated — only the proposed model is checkpointed and served by the dashboard; the other four exist to make the comparison honest, not just to pad a table.
+Five architectures, all trained on the identical real dataset and split, all independently evaluated. Checkpoints are written for most of them under `checkpoints/*.pt`, but only `cnn_gat.pt` is what the dashboard actually loads and serves (`backend/main.py` looks for a `cnn_gat_v2.pt` first and falls back to `cnn_gat.pt`, since the serving code has already been updated for the newer pipeline described in the note above) — the other architectures exist to make the comparison honest, not just to pad a table.
 
 ### Module 1 — CNN (temporal baseline)
 
@@ -141,7 +152,7 @@ All five train in one run (no separate scripts per module — the dataset and sp
 - `results/ablation_study.json` — feature-group ablation on CNN+GAT
 - `results/dataset_distribution.json` — split sizes, class balance
 - `figures/confusion_matrix_cnn_gat_test.png`
-- `checkpoints/cnn_gat.pt` — the only checkpoint persisted; the others are metrics-only
+- `checkpoints/<model>.pt` — per-model checkpoint (weights + best-val metrics + seed); `cnn_gat.pt` is the one the dashboard loads
 
 Check what's trained:
 
@@ -149,7 +160,7 @@ Check what's trained:
 curl http://localhost:8000/api/health
 ```
 
-### Ablation — feature-group contribution (CO5 innovation evidence)
+### Ablation — feature-group contribution
 
 | Ablation | Rolling form/pace | Pit stops | Quali gap | Test Acc | Test F1 | Test AUC |
 |---|:---:|:---:|:---:|--:|--:|--:|
@@ -216,7 +227,7 @@ flowchart TD
 ## Project Structure
 
 ```text
-2430010326/
+ApexNet/
 │
 ├── README.md
 ├── requirements.txt
@@ -231,7 +242,8 @@ flowchart TD
 │   ├── real_data.py             # real f1db loading, leakage-checked features, 3-way split
 │   ├── main.py                  # FastAPI entry point — dashboard + /api/* routes
 │   ├── race.py                  # live-replay state machine
-│   ├── config.py / logger.py
+│   ├── config.py                # hyperparameters, split ratios, feature list
+│   └── logger.py                # logging setup (APEXNET_LOG_LEVEL / APEXNET_LOG_DIR)
 │
 ├── frontend/                    # live-replay dashboard (static HTML/JS)
 │
@@ -247,8 +259,12 @@ flowchart TD
 ├── models/
 │   └── model_description.txt
 │
+├── logs/                        # apexnet.log, train_run.log
+│
 └── checkpoints/
-    └── cnn_gat.pt
+    ├── cnn_gat.pt                # loaded and served by the dashboard
+    ├── cnn.pt / gat.pt / lstm.pt # comparison checkpoints
+    └── metrics.json
 ```
 
 ---
@@ -318,13 +334,13 @@ curl http://localhost:8000/api/tracks
 
 ## Deployment
 
-Not configured — this runs locally for evaluation. No Dockerfile is included; there's no external API dependency (unlike Velaris's OpenRouter chain) so there's nothing to containerize for secrets management, only for portability if that becomes a requirement later.
+Not configured — this runs locally for evaluation only. There's no external API dependency and no secrets to manage, so no Dockerfile is included; containerizing it would only be about portability, not security, if that becomes a requirement later.
 
 ---
 
 ## Environment Variables
 
-None required. Training and serving both run entirely on local compute against the bundled `data/*.csv` — no API keys, no external service calls.
+None are required — training and serving both run entirely on local compute against the bundled `data/*.csv`, with no API keys or external service calls. Two optional variables control logging:
 
 | Variable | Required | Description |
 |---|---|---|
@@ -352,7 +368,9 @@ None required. Training and serving both run entirely on local compute against t
 
 | Item | Why |
 |---|---|
+| Reconcile `backend/` with this README | The code already supports 8 architectures / 3-seed reporting; re-run `train.py` and update the numbers above to match, or branch the newer work off separately |
+| Remove or clearly mark `backend/data.py` | Dead synthetic-data code sitting in a repo whose pitch is "no fabricated signal" is an easy thing for a reviewer to flag |
 | Position-regression reframing | Would allow a true row-for-row comparison against published rank-prediction papers |
 | Larger dataset (pre-2014 eras) | ~275 races is small for a 5-architecture comparison; more data would tighten the metric gaps |
 | Real sub-lap telemetry (if a licensed source becomes reachable) | Would let the CNN branch use an actual time series instead of a tiled static vector |
-| Per-module inference endpoints | Expose CNN/GAT/LSTM/CNN+LSTM individually via API, not just the served CNN+GAT, mirroring Velaris's standalone module endpoints |
+| Per-module inference endpoints | Expose CNN/GAT/LSTM/CNN+LSTM individually via API, not just the served CNN+GAT |
