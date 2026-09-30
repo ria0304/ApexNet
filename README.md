@@ -14,21 +14,7 @@ ApexNet trains five deep-learning architectures on real historical Formula 1 rac
 
 </div>
 
----
 
-## The Problem
-
-Predicting race outcomes with deep learning is the obvious assignment framing — but the obvious data for it, sub-lap car telemetry (speed/throttle/brake/DRS at several Hz), isn't legally or technically reachable from this project's network access. FastF1 and the F1 live-timing API are both unreachable here.
-
-Most projects solve that by quietly synthesizing telemetry and presenting it as real, or by not mentioning the gap at all.
-
-## The Solution
-
-ApexNet reframes the task around data that **is** real: grid position, qualifying gap, pit-stop lap numbers, and leakage-checked rolling season form, pulled from f1db's public race-results archive — no fabricated signal in the training pipeline itself.
-
-Instead of predicting a short telemetry window the data can't support, it predicts a real, race-long, binary outcome: **does the driver who starts behind a given rival finish ahead of them by the flag.**
-
----
 
 ## Core Prediction Flow
 
