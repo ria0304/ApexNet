@@ -318,23 +318,6 @@ curl http://localhost:8000/api/tracks
 
 ---
 
-## Deployment
-
-Not configured — this runs locally for evaluation only. There's no external API dependency and no secrets to manage, so no Dockerfile is included; containerizing it would only be about portability, not security, if that becomes a requirement later.
-
----
-
-## Environment Variables
-
-None are required — training and serving both run entirely on local compute against the bundled `data/*.csv`, with no API keys or external service calls. Two optional variables control logging:
-
-| Variable | Required | Description |
-|---|---|---|
-| `APEXNET_LOG_LEVEL` | No | Logging verbosity (default: `INFO`) |
-| `APEXNET_LOG_DIR` | No | Where `apexnet.log` is written (default: `logs/`) |
-
----
-
 ## API Endpoints
 
 | Method | Endpoint | Description |
