@@ -47,16 +47,6 @@ Live dashboard replay against the real historical race
 | Published-literature comparison, dataset mismatch stated honestly | ✅ |
 | Live replay dashboard against real race results | ✅ |
 
----
-
-## ⚠️ A Note on Repository State
-
-This README, and everything below it, describes the pipeline that actually produced the committed artifacts in `results/` and `checkpoints/` — five architectures, one training run each (seed=42). That's what you'll reproduce if you run `backend/train.py` from this snapshot.
-
-Two things worth knowing if you're browsing the code directly rather than just reading this file:
-
-- **The backend has moved ahead of these numbers.** `backend/config.py` now defines `SEEDS = [42, 43, 44]`, and `backend/train.py` / `backend/model.py` support eight architectures — the five below plus a `cnn_gat_v2` "gated-fusion" variant, a Transformer baseline, and a GCN baseline — along with two classical scikit-learn baselines (logistic regression, gradient boosting) for a sanity check. `models/model_description.txt` documents that newer pipeline in detail. None of that has been re-run to completion, so its results aren't reflected here. If you pull the latest code and run `train.py`, expect a longer run and a `results/metrics.json` with a different shape than the tables below — re-run it and refresh this README before trusting the newer numbers.
-- **`backend/data.py`** is a leftover synthetic-data generator from an earlier version of this project. It isn't imported by `train.py` or `main.py` — actual training only ever goes through `backend/real_data.py` — but it's still sitting in the repo, which is worth cleaning up given the project's whole pitch is "no fabricated signal anywhere."
 
 ---
 
