@@ -323,13 +323,4 @@ curl http://localhost:8000/api/tracks
 
 ---
 
-## Future Scope
 
-| Item | Why |
-|---|---|
-| Reconcile `backend/` with this README | The code already supports 8 architectures / 3-seed reporting; re-run `train.py` and update the numbers above to match, or branch the newer work off separately |
-| Remove or clearly mark `backend/data.py` | Dead synthetic-data code sitting in a repo whose pitch is "no fabricated signal" is an easy thing for a reviewer to flag |
-| Position-regression reframing | Would allow a true row-for-row comparison against published rank-prediction papers |
-| Larger dataset (pre-2014 eras) | ~275 races is small for a 5-architecture comparison; more data would tighten the metric gaps |
-| Real sub-lap telemetry (if a licensed source becomes reachable) | Would let the CNN branch use an actual time series instead of a tiled static vector |
-| Per-module inference endpoints | Expose CNN/GAT/LSTM/CNN+LSTM individually via API, not just the served CNN+GAT |
